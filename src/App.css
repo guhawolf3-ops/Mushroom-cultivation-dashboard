@@ -1,0 +1,185 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  background: #f4f7fb;
+}
+
+
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 40px 20px;
+  color: green;
+}
+
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.card {
+  background: white;
+  width: 220px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(65, 51, 51, 0.1);
+}
+
+.card p {
+  font-size: 18px;
+  color: darkgray;
+}
+
+.card h2 {
+  margin-top: 10px;
+  font-size: 28px;
+}
+
+.on {
+  color: forestgreen;
+}
+
+.off {
+  color: red;
+}
+.subtitle {
+  color:darkgray;
+  margin-top: -10px;
+  font-size: 16px;
+}
+
+.icon {
+  font-size: 32px;
+}
+
+.card small {
+  display: block;
+  margin-top: 8px;
+  color: #f8f7f7;
+  font-size: 13px;
+}
+
+.info-box {
+  margin-top: 40px;
+  background: white;
+  padding: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.info-box h3 {
+  margin-bottom: 10px;
+}
+
+.status-bar {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 260px;
+  text-align: center;
+}
+
+.normal {
+  background-color: #2e7d32;
+  color: white;
+}
+
+.warning {
+  background-color: #f9a825;
+  color: black;
+}
+
+.high {
+  background-color: #c62828;
+  color: white;
+}
+
+.humidity-container{
+  margin-top: 25px;
+  text-align: center;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.progress-bar{
+  background: #ccc;
+  border-radius: 10px;
+  height: 18px;
+  width: 80%;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.progress-fill{
+  border-radius: 10px;
+  height: 100%;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.humidity-value{
+  margin-top: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.chart-container {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.control-panel {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.control-panel button {
+  margin: 8px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.active-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.manual-controls {
+  margin-top: 15px;
+}
+
+.threshold-panel {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.threshold-panel input {
+  padding: 6px;
+  width: 80px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
