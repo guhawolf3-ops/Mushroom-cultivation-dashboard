@@ -1,29 +1,25 @@
 function HumidityBar({ humidity }) {
-let barColor = "";
-
-if (humidity < 75) {
-  barColor = "#f9a825"; // yellow
-} 
-else if (humidity <= 95) {
-  barColor = "#4caf50"; // green
-} 
-else {
-  barColor = "#c62828"; // red
-}
-
-
   return (
-    <div className="humidity-container">
-
-      <div className="progress-bar">
-        <div 
-          className="progress-fill"
-          style={{ width: `${humidity}%`,backgroundColor:barColor}}
-        ></div>
+    <div>
+      <div
+        style={{
+          background: "#e5e7eb",
+          borderRadius: "10px",
+          height: "12px",
+          marginTop: "10px",
+        }}
+      >
+        <div
+          style={{
+            width: `${humidity}%`,
+            background: "#22c55e",
+            height: "12px",
+            borderRadius: "10px",
+          }}
+        />
       </div>
 
-      <p className="humidity-value">{humidity}%</p>
-
+      <p style={{ marginTop: "8px" }}>{humidity}%</p>
     </div>
   );
 }

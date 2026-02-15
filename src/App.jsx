@@ -1,89 +1,93 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import StatusBar from "./components/StatusBar";
+
+import AIPanel from "./components/AIPanel";
 import HumidityBar from "./components/HumidityBar";
 import HumidityChart from "./components/HumidityChart";
-import ControlPanel from "./components/ControlPanel";
-import ThresholdPanel from "./components/ThresholdPanel";
-
-
 
 function App() {
   const [temperature, setTemperature] = useState(28);
   const [humidity, setHumidity] = useState(85);
   const [mist, setMist] = useState("OFF");
-  const [mode, setMode] = useState("AUTO");
-  const [threshold, setThreshold] = useState(85);
+
+  const [dynamicThresholdState, setDynamicThresholdState] = useState(85);
+  const [humidityTrendState, setHumidityTrendState] = useState(0);
+  const [predictedHumidity, setPredictedHumidity] = useState(0);
+  const [aiReason, setAiReason] = useState("Normal conditions");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const temp = Math.floor(Math.random() * 6) + 25; // 25–30
-      const hum = Math.floor(Math.random() * 30) + 65; // 65–95
+      const temp = Math.floor(Math.random() * 6) + 25;
+      const hum = Math.floor(Math.random() * 30) + 65;
 
       setTemperature(temp);
       setHumidity(hum);
 
-      if (hum < 85) {
-        setMist("ON");
-      } else {
-        setMist("OFF");
-      }
+      if (hum < 85) setMist("ON");
+      else setMist("OFF");
+
+      setPredictedHumidity(hum + (Math.random() * 10 - 5));
+      setHumidityTrendState(Math.random() * 10 - 5);
     }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-  <div className="container">
-    <h1>Intelligent Mushroom Cultivation System</h1>
-    <p className="subtitle">
-      Real-time monitoring and automatic misting control
-    </p>
+    <div className="dashboard-wrapper">
 
-    <div className="cards">
-      <div className="card">
-        <span className="icon">🌡</span>
-        <p>Temperature</p>
-        <h2>{temperature} °C</h2>
-        <small>Room air temperature</small>
-      </div>
+      <header className="dashboard-header">
+        <div>
+          <h1>Intelligent Mushroom Cultivation System</h1>
+          <p>Real-time monitoring and predictive automation</p>
+        </div>
+      </header>
 
-      <div className="card">
-        <span className="icon">💧</span>
-        <p>Humidity</p>
-        <HumidityBar humidity={humidity} />
-        <small>Moisture level in air</small>
-      </div>
+      {/* METRICS */}
+      <section className="metrics-grid">
 
-      <div className="card">
-        <span className="icon">🚿</span>
-        <p>Misting Status</p>
-        <h2 className={mist === "ON" ? "on" : "off"}>
-          {mist}
-        </h2>
-        <small>
-          {mist === "ON"
-            ? "Humidity low — misting activated"
-            : "Humidity normal"}
-        </small>
-      </div>
+        <div className="card">
+          <p>Temperature</p>
+          <h2>{temperature} °C</h2>
+          <small>Room air temperature</small>
+        </div>
+
+        <div className="card">
+          <p>Humidity</p>
+          <HumidityBar humidity={humidity} />
+          <small>Moisture level in air</small>
+        </div>
+
+        <div className="card">
+          <p>Misting Status</p>
+          <h2 className={mist === "ON" ? "on" : "off"}>{mist}</h2>
+          <small>
+            {mist === "ON"
+              ? "Humidity low — misting activated"
+              : "Humidity normal"}
+          </small>
+        </div>
+
+      </section>
+
+      {/* MAIN CONTENT */}
+      <section className="content-grid">
+
+        <AIPanel
+          dynamicThreshold={dynamicThresholdState}
+          humidityTrend={humidityTrendState}
+          predictedHumidity={predictedHumidity}
+          aiReason={aiReason}
+        />
+
+        <div className="chart-box">
+          <HumidityChart humidity={humidity} />
+        </div>
+
+      </section>
+
     </div>
-    <div>
-      <StatusBar humidity={humidity}/>
-      <HumidityChart humidity={humidity} />
-      <ControlPanel 
-       mode={mode} 
-       setMode={setMode} 
-       mist={mist} 
-       setMist={setMist}
-      />
-      <ThresholdPanel 
-      threshold={threshold}
-      setThreshold={setThreshold}
-      />
-    </div>
-  </div>
-);
+  );
 }
 
 export default App;
